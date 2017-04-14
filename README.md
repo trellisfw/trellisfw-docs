@@ -10,7 +10,7 @@ food safety certificates.
 
 ## fPAD Document Integrity Signatures
 
-[https://fpad.github.io/fpad-audit-sign-verify](Demo application to sign and verify documents is here.)
+[Demo application to sign and verify documents is here.](https://fpad.github.io/fpad-audit-sign-verify)
 
 Food safety audit data is sensitive and therefore needs a means by which a recipient can verify
 that the audit has not been tampered with since it was first created by an auditor.  fPAD 
