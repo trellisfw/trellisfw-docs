@@ -28,6 +28,8 @@ in the signature is from a trusted authority.
 fPAD uses the [JSON Web Token standard](https://jwt.io) to represent the signature.  The process
 for generating the signature is relatively straighforward, and example code which does this can 
 be found in [https://github.com/fpad/fpad-audit-sign-verify](https://github.com/fpad/fpad-audit-sign-verify).
+There is also a standalone JavaScript implementation: 
+[https://github.com/fpad/fpad-signatures](https://github.com/fpad/fpad-signatures).
 
 # To create a signature:
 ---------------------------------------------------------
