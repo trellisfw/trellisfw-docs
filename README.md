@@ -4,7 +4,8 @@ Documentation for the fPAD framework.
 This is a work-in-progress.  Documentation will be added as various components are finalized.
 
 ## Core data models
-You can find definitions of the core data models in the `oada-formats` repository under "fpad".
+You can find definitions of the core data models in the `oada-formats` repository 
+[under "fpad"](https://github.com/OADA/oada-formats/tree/master/formats/application/vnd/fpad).
 This describes JSON documents for representing a food safety audit, corrective actions, and
 food safety certificates.  
 
