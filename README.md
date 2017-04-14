@@ -24,7 +24,7 @@ will not match.  If both the signature and the document are tampered with, one m
 signature came from a trusted authority in order to determine trust by checking if the public key
 in the signature is from a trusted authority.
 
-fPAD uses the [https://jwt.io](JSON Web Token standard) to represent the signature.  The process
+fPAD uses the [JSON Web Token standard](https://jwt.io) to represent the signature.  The process
 for generating the signature is relatively straighforward, and example code which does this can 
 be found in [https://github.com/fpad/fpad-audit-sign-verify](https://github.com/fpad/fpad-audit-sign-verify).
 
