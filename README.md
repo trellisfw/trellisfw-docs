@@ -1,7 +1,15 @@
-# fpad-docs
-Documentation for the fPAD framework.
+# trellis-docs
+Documentation for the Trellis framework for data.
 
-This is a work-in-progress.  Documentation will be added as various components are finalized.
+The Trellis Framework builds on the [Open Ag Data Alliance API standards](https://github.com/oada/oada-docs).
+The core of this framework is an API spec for creating data **connections** between
+platforms. Any platform can be made "Trellis conformant" or "OADA conformant" by supporting
+that API, the core of which is defined at the [Open Ag Data Alliance](https://github.com/oada/oada-api-spec
+
+There are two main components: data models and an API specification.  The data models for audits 
+are JSON-based and can be found here [](https://github.com/oada/oada-formats)
+
+The first phase of Trellis has focused o
 
 ## Core data models
 You can find definitions of the core data models in the `oada-formats` repository 
