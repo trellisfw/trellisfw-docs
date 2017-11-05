@@ -6,10 +6,17 @@ The core of this framework is an API spec for creating data **connections** betw
 platforms. Any platform can be made "Trellis conformant" or "OADA conformant" by supporting
 that API, the core of which is defined at the [Open Ag Data Alliance](https://github.com/oada/oada-api-spec
 
-There are two main components: data models and an API specification.  The data models for audits 
-are JSON-based and can be found here [](https://github.com/oada/oada-formats)
+## Useful links for Trellis:
+| Item | Link |
+| --- | --- |
+|  Data Models   |  (https://github.com/OADA/oada-formats/tree/master/formats/application/vnd/trellis) |
+|  OADA API Core |  (https://github.com/OADA/oada-docs) |
+|  Signatures    |  (https://github.com/trellisfw/models) |
+|  Signatures Demo | (https://trellisfw.github.io/trellisfw-audit-sign-verify) |
+|  Proof of Concept Web Apps | (https://github.com/trellisfw/trellisfw-poc) |
+|  Running PoC Web Apps | (https://tinyurl.com/trellisfwpoc) |
+|  OADA Backend supporting PoC | (https://github.com/oada/oada-srvc-docker) |
 
-The first phase of Trellis has focused o
 
 ## Core data models
 You can find definitions of the core data models in the `oada-formats` repository 
