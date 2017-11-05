@@ -11,7 +11,7 @@ that API.
 | --- | --- |
 |  Data Models   |  https://github.com/OADA/oada-formats/tree/master/formats/application/vnd/trellis |
 |  OADA API Core |  https://github.com/OADA/oada-docs |
-|  Signatures    |  https://github.com/trellisfw-signatures |
+|  Signatures    |  https://github.com/trellisfw/trellisfw-signatures |
 |  Signatures Demo | https://trellisfw.github.io/trellisfw-audit-sign-verify |
 |  Proof of Concept Web Apps | https://github.com/trellisfw/trellisfw-poc |
 |  Running PoC Web Apps | https://tinyurl.com/trellisfwpoc |
