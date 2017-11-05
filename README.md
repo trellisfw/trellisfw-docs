@@ -4,7 +4,7 @@ Documentation for the Trellis framework for data.
 The Trellis Framework builds on the [Open Ag Data Alliance API standards](https://github.com/oada/oada-docs).
 The core of this framework is an API spec for creating data **connections** between
 platforms. Any platform can be made "Trellis conformant" or "OADA conformant" by supporting
-that API, the core of which is defined at the [Open Ag Data Alliance](https://github.com/oada/oada-api-spec)
+that API.
 
 ## Useful links for Trellis:
 | Item | Link |
