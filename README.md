@@ -4,18 +4,18 @@ Documentation for the Trellis framework for data.
 The Trellis Framework builds on the [Open Ag Data Alliance API standards](https://github.com/oada/oada-docs).
 The core of this framework is an API spec for creating data **connections** between
 platforms. Any platform can be made "Trellis conformant" or "OADA conformant" by supporting
-that API, the core of which is defined at the [Open Ag Data Alliance](https://github.com/oada/oada-api-spec
+that API, the core of which is defined at the [Open Ag Data Alliance](https://github.com/oada/oada-api-spec)
 
 ## Useful links for Trellis:
 | Item | Link |
 | --- | --- |
-|  Data Models   |  [https://github.com/OADA/oada-formats/tree/master/formats/application/vnd/trellis] |
-|  OADA API Core |  [https://github.com/OADA/oada-docs] |
-|  Signatures    |  [https://github.com/trellisfw/models] |
-|  Signatures Demo | [https://trellisfw.github.io/trellisfw-audit-sign-verify] |
-|  Proof of Concept Web Apps | [https://github.com/trellisfw/trellisfw-poc] |
-|  Running PoC Web Apps | [https://tinyurl.com/trellisfwpoc] |
-|  OADA Backend supporting PoC | [https://github.com/oada/oada-srvc-docker] |
+|  Data Models   |  https://github.com/OADA/oada-formats/tree/master/formats/application/vnd/trellis |
+|  OADA API Core |  https://github.com/OADA/oada-docs |
+|  Signatures    |  https://github.com/trellisfw/models |
+|  Signatures Demo | https://trellisfw.github.io/trellisfw-audit-sign-verify |
+|  Proof of Concept Web Apps | https://github.com/trellisfw/trellisfw-poc |
+|  Running PoC Web Apps | https://tinyurl.com/trellisfwpoc |
+|  OADA Backend supporting PoC | https://github.com/oada/oada-srvc-docker |
 
 
 ## Core data models
