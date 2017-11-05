@@ -9,13 +9,13 @@ that API, the core of which is defined at the [Open Ag Data Alliance](https://gi
 ## Useful links for Trellis:
 | Item | Link |
 | --- | --- |
-|  Data Models   |  (https://github.com/OADA/oada-formats/tree/master/formats/application/vnd/trellis) |
-|  OADA API Core |  (https://github.com/OADA/oada-docs) |
-|  Signatures    |  (https://github.com/trellisfw/models) |
-|  Signatures Demo | (https://trellisfw.github.io/trellisfw-audit-sign-verify) |
-|  Proof of Concept Web Apps | (https://github.com/trellisfw/trellisfw-poc) |
-|  Running PoC Web Apps | (https://tinyurl.com/trellisfwpoc) |
-|  OADA Backend supporting PoC | (https://github.com/oada/oada-srvc-docker) |
+|  Data Models   |  [https://github.com/OADA/oada-formats/tree/master/formats/application/vnd/trellis] |
+|  OADA API Core |  [https://github.com/OADA/oada-docs] |
+|  Signatures    |  [https://github.com/trellisfw/models] |
+|  Signatures Demo | [https://trellisfw.github.io/trellisfw-audit-sign-verify] |
+|  Proof of Concept Web Apps | [https://github.com/trellisfw/trellisfw-poc] |
+|  Running PoC Web Apps | [https://tinyurl.com/trellisfwpoc] |
+|  OADA Backend supporting PoC | [https://github.com/oada/oada-srvc-docker] |
 
 
 ## Core data models
