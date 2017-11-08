@@ -32,6 +32,30 @@ Authorization: Bearer aaa
 ```
 ![Image of Postman response](./img/gettingstarted_postman_response.png)
 
+What you just did was use an authorized token (`aaa`) to make a request as Audrey the Auditor
+to get her list of certifications.  The response has a content type of 
+`application/vnd.trellisfw.certifications.1+json`, which is defined [here](https://github.com/OADA/oada-formats/blob/master/formats/application/vnd/trellis/certifications/1/%2Bjson/examples/default.js) and
+is a list of links to certification resources (links are those JSON objects with `_id` and `_rev` keys in them).  
+
+You can go get one of them.  The keys in this case are random so yours will be differnet than the ones listed 
+here.  What's important is that since they are links, you can just paste one of those keys on onto the end of 
+the URL to get that resource:
+
+```http
+GET /bookmarks/trellisfw/certifications/b1aec736-8554-444b-af05-0b3241adabad HTTP/1.1
+Host: https://api.abcaudits.trellisfw.io
+Authorization: Bearer aaa
+```
+![Image of Postman response 2](./img/gettingstarted_postman_response2.png)
+
+Each certification is comprised on up to 3 parts: audit, corrective actions, and certificate.  In this
+case, we just have an audit: it's a link here under the key `audit`.  Go ahead and paste that key onto
+the URL to get the audit document itself:
+
+
+
+
+
 ## Core data models
 You can find definitions of the core data models in the `oada-formats` repository 
 [under "fpad"](https://github.com/OADA/oada-formats/tree/master/formats/application/vnd/fpad).
