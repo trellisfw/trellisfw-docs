@@ -17,6 +17,20 @@ that API.
 |  Running PoC Web Apps | https://tinyurl.com/trellisfwpoc |
 |  OADA Backend supporting PoC | https://github.com/oada/oada-srvc-docker |
 
+## Getting Started
+
+You can start by using the Trellis Proof-of-Concept to create some real data connections and
+watch produce safety audits flow between them.  A walkthrough can be found [here](https://trellisfw.github.io/trellisfw-poc).
+
+The apps are supported by the [OADA reference implementation](https://github.com/oada/oada-srvc-docker).  You
+can connect to that API yourself as any of the demo users using [Postman](https://www.getpostman.com/):
+
+```http
+GET /bookmarks/trellisfw/certifications HTTP/1.1
+Host: https://api.growersync.trellisfw.io
+Authorization: Bearer ggg
+```
+
 
 ## Core data models
 You can find definitions of the core data models in the `oada-formats` repository 
