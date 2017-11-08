@@ -27,10 +27,10 @@ can connect to that API yourself as any of the demo users using [Postman](https:
 
 ```http
 GET /bookmarks/trellisfw/certifications HTTP/1.1
-Host: https://api.growersync.trellisfw.io
-Authorization: Bearer ggg
+Host: https://api.abcaudits.trellisfw.io
+Authorization: Bearer aaa
 ```
-
+![Image of Postman response](./img/gettingstarted_postman_response.png)
 
 ## Core data models
 You can find definitions of the core data models in the `oada-formats` repository 
