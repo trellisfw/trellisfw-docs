@@ -31,6 +31,7 @@ GET /bookmarks/trellisfw/certifications HTTP/1.1
 Host: https://api.abcaudits.trellisfw.io
 Authorization: Bearer aaa
 ```
+<<<<<<< HEAD
 ![Image of Postman response](./img/postman1.png)
 
 You can see the response that came back at the bottom: a JSON document with some keys that are random
@@ -62,6 +63,28 @@ Host: https://api.abcaudits.trellisfw.io
 Authorization: Bearer aaa
 ```
 ![Image of Postman response](./img/postman3.png)
+
+## Running your own OADA/Trellis Server:
+You can run the OADA reference implementation locally yourself 
+(you need docker and docker-compose):
+
+```bash
+$ git clone git@github.com:OADA/oada-srvc-docker.git
+$ cd oada-srvc-docker
+$ docker-compose up -d
+```
+
+Once it's up (it takes awhile to build the first time), you can alter your
+`/etc/hosts` to map any of the PoC domains to `127.0.0.1` (or alter the docker-compose 
+file if you're on Linux instead of Mac).  Or, you can just use localhost directly.
+Unfortunately, the included HTTPS certs won't be trusted by Chrome out of the box,
+which can cause no end of headaches.  You have to get Chrome to approve it before
+Postman will work.  
+
+To do that, just go in Chrome to `https://localhost/.well-known/oada-configuration`.
+Then click "Advanced", and "Proceed to localhost (unsafe)".  Now Postman will work
+for localhost.  If you mapped any of the other domains, just navigate to their
+`oada-configuration` as well.
 
 For further information on the API, please review the [OADA docs](https://github.com/oada/oada-docs).
 
