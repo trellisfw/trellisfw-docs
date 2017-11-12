@@ -31,7 +31,6 @@ GET /bookmarks/trellisfw/certifications HTTP/1.1
 Host: https://api.abcaudits.trellisfw.io
 Authorization: Bearer aaa
 ```
-<<<<<<< HEAD
 ![Image of Postman response](./img/postman1.png)
 
 You can see the response that came back at the bottom: a JSON document with some keys that are random
