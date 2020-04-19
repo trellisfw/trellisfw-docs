@@ -75,7 +75,7 @@ services:
     environment:
       - token=yourtoken
       - domain=https://yourdomain
-      - blacklist=abalmos@gmail.com,abalmos@purdue.edu
+      - blacklist=emails@to.blacklist,another@email.toblacklist
 
   trellis-signer:
     volumes:
