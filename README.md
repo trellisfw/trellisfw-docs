@@ -5,7 +5,7 @@ The Trellis Framework builds on the [Open Ag Data Alliance API standards](https:
 The core of this framework is an API spec for creating data **connections** between
 platforms. Any platform or app can be made "Trellis conformant" or "OADA conformant" by supporting
 that API.  Trellis adds a [document signature process](signatures.md) for document integrity to the OADA 
-standard as well.
+standard, as well as a method auditably obscuring shared data to preserve privacy known as [Mask & Link](https://github.com/trellisfw/trellisfw-masklink).
 
 ## Useful links for Trellis:
 | Item | Link |
@@ -14,76 +14,106 @@ standard as well.
 |  OADA API Core |  https://github.com/OADA/oada-docs |
 |  Signatures    |  https://github.com/trellisfw/trellisfw-signatures |
 |  Signatures Demo | https://trellisfw.github.io/trellisfw-audit-sign-verify |
-|  Proof of Concept Web Apps Code | https://github.com/trellisfw/trellisfw-poc |
-|  Live PoC Web Apps | https://trellisfw.github.io/trellisfw-poc/ |
-|  OADA Backend supporting PoC | https://github.com/oada/oada-srvc-docker |
+| Mask&Link | https://github.com/trellisfw/trellisfw-masklink |
 
 ## Getting Started
 
-You can start by using the Trellis Proof-of-Concept to create some real data connections and
-watch produce safety audits flow between them.  A walkthrough can be found [here](https://trellisfw.github.io/trellisfw-poc/).
-
-The apps are supported by the [OADA reference implementation](https://github.com/oada/oada-srvc-docker).  You
-can connect to that API yourself as any of the demo users using [Postman](https://www.getpostman.com/):
-
-```http
-GET /bookmarks/trellisfw/certifications HTTP/1.1
-Host: https://api.abcaudits.trellisfw.io
-Authorization: Bearer aaa
-```
-![Image of Postman response](./img/postman1.png)
-
-You can see the response that came back at the bottom: a JSON document with some keys that are random
-strings, and some other keys that start with underscores (_).  The underscore keys are required by the 
-OADA API, and the remaining keys are certification id's for food safety certifications.  The way you
-know that is by the content type: the content-type identifies a particular kind of document,
-the details of which, including examples,  are specified in the 
-[OADA Formats](https://github.com/OADA/oada-formats/tree/master/formats/application/vnd/trellis)
-repository under "trellis".
-
-OADA defines the concept of a link between documents: each of those certification keys has a 
-value that looks like an object with an `_id` and an `_rev` key in it.  That's a "link" to
-another resource.  Anything that is a link can be navigated to simply by appending the key of the link 
-to the end of the current URL:
-```http
-GET /bookmarks/trellisfw/certifications/d181ba79-5e60-4d0f-9fbc-5d45641d9635
-Host: https://api.abcaudits.trellisfw.io
-Authorization: Bearer aaa
-```
-![Image of Postman response](./img/postman2.png)
-
-A "certification" contains an "audit" (as well as potentially corrective actions or a certificate).
-Notice the "audit" key looks like one of those link objects again: let's append the "audit" key to the
-URL to view the actual audit:
-
-```http
-GET /bookmarks/trellisfw/certifications/d181ba79-5e60-4d0f-9fbc-5d45641d9635/audit
-Host: https://api.abcaudits.trellisfw.io
-Authorization: Bearer aaa
-```
-![Image of Postman response](./img/postman3.png)
-
-## Running your own OADA/Trellis Server:
-You can run the OADA reference implementation locally yourself 
-(you need docker and docker-compose):
-
+To start using Trellis, download and install the [OADA Reference Implementation](https://github.com/oada/oada-srvc-docker):
 ```bash
-$ git clone git@github.com:OADA/oada-srvc-docker.git
-$ cd oada-srvc-docker
-$ docker-compose up -d
+git clone git@github.com:OADA/oada-srvc-docker.git
+cd oada-srvc-docker
+./oada --install-self
+oada up -d
+```
+Please refer to the [OADA Documentation](https//github.com/oada/oada-docs).
+
+## Apps
+
+### Conductor
+Conductor lets you monitor and drop in PDF documents for scraping, analysis, and sharing via automatic smart rules.  In order to run Conductor yourself, you should have the following service modules running against your Trellis installation:
+* [ainz](https://github.com/trellisfw/ainz): main "smart rules" orchestration service
+* [abalonemail](https://github.com/trellisfw/abalonemail): service for sending emails in response to rules via sendgrid
+* [sendgrid-ingest](https://github.com/trellisfw/sendgrid-ingest): receives emails from sendgrid and places them in the document queue.
+* [oada-backups](https://github.com/oada/oada-backups): Maintains rolling nightly backups of internal database
+* [oada-ensure](https://github.com/oada/oada-ensure): Ensures doubly-linked virtual documents
+* [trellis-masker](https://github.com/trellisfw/trellis-masker): Service to automatically mask particular key names in any virtual document's JSON
+* [trellis-signer](https://github.com/trellisfw/trellis-signer): Service to sign incoming JSON as transcriptions
+
+For your deployment, you should have your own domains and tokens.  You can easily supply your production domains and tokens to these services using the `z_tokens` method: create and enable `z_tokens/docker-compose.yml` which looks like this:
+```docker-compose
+version: '3'
+
+services:
+  ##########################################
+  # Overrides for oada-core services:
+  ##########################################
+  admin:
+    volumes:
+      - ./services-available/z_tokens:/code/z_tokens
+
+  ###############################################
+  # Add tokens for all services that need them:
+  ###############################################
+  abalonemail:
+    environment:
+      - token=yourtoken
+      - domain=https://yourdomain
+      - emailKey=youremailkeyforsendgrid
+      - from=your@from.address
+
+  ainz:
+    environment:
+      - token=yourtoken
+      - domain=https://yourdomain
+
+  sendgrid-ingest:
+    environment:
+      - token=yourtoken
+      - domain=https://yourdomain
+      - blacklist=abalmos@gmail.com,abalmos@purdue.edu
+
+  trellis-signer:
+    volumes:
+      - ./services-available/z_tokens/private_key.jwk:/private_key.jwk
+    environment:
+      - token=yourtoken
+      - domain=https://yourdomain
+      - privateJWK=/private_key.jwk
+
+  trellis-masker:
+    volumes:
+      - ./services-available/z_tokens/private_key.jwk:/private_key.jwk
+    environment:
+      - token=yourtoken
+      - domain=https://yourdomain
+      - privateJWK=/private_key.jwk
+
+  oada-ensure:
+    environment:
+      - token=yourtoken
+      - domain=https://yourdomain
 ```
 
-Once it's up (it takes awhile to build the first time), you can alter your
-`/etc/hosts` to map any of the PoC domains to `127.0.0.1` (or alter the docker-compose 
-file if you're on Linux instead of Mac).  Or, you can just use localhost directly.
-Unfortunately, the included HTTPS certs won't be trusted by Chrome out of the box,
-which can cause no end of headaches.  You have to get Chrome to approve it before
-Postman will work.  
+### Reagan
+If you have a "masked" piece of data and have permission from the data owner to verify it, you can pass that
+masked object (or a URL to something that is masked), and Reagan will `Trust, but Verify` for you.  Just add either
+a `trellis-mask` or `masked-resource-url` query parameter and watch it work it's magic!
 
-To do that, just go in Chrome to `https://localhost/.well-known/oada-configuration`.
-Then click "Advanced", and "Proceed to localhost (unsafe)".  Now Postman will work
-for localhost.  If you mapped any of the other domains, just navigate to their
-`oada-configuration` as well.
+* Code: https://github.com/trellisfw/reagan
+* Live: https://trellisfw.github.com/reagan
 
-For further information on the API, please review the [OADA docs](https://github.com/oada/oada-docs).
+## Libraries
+Useful javascript libraries for Trellis:
+* [Trellis Mask&Link](https://github.com/trellisfw-masklink): library for creating and validating masks.
+* [Trellis Signatures](https://github.com/trellisfw-signatures): library for creating and validating Trellis document signatures.
+* [Trellis Formats](https://github.com/oada/oada-formats): Schemas for various Trellis document types.
 
+## Services
+* [ainz](https://github.com/trellisfw/ainz): main "smart rules" orchestration service
+* [abalonemail](https://github.com/trellisfw/abalonemail): service for sending emails in response to rules via sendgrid
+* [sendgrid-ingest](https://github.com/trellisfw/sendgrid-ingest): receives emails from sendgrid and places them in the document queue.
+* [oada-backups](https://github.com/oada/oada-backups): Maintains rolling nightly backups of internal database
+* [oada-ensure](https://github.com/oada/oada-ensure): Ensures doubly-linked virtual documents
+* [trellis-masker](https://github.com/trellisfw/trellis-masker): Service to automatically mask particular key names in any virtual document's JSON
+* [trellis-signer](https://github.com/trellisfw/trellis-signer): Service to sign incoming JSON as transcriptions
+* [unfisk](https://github.com/trellisfw/unfisk): Service to simplify PUT's to OADA: you can PUT an object to a parent resource, and this service will automatically make it into a resource and link appropriately.
