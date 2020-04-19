@@ -29,8 +29,13 @@ Please refer to the [OADA Documentation](https//github.com/oada/oada-docs).
 
 ## Apps
 
-### Conductor
-Conductor lets you monitor and drop in PDF documents for scraping, analysis, and sharing via automatic smart rules.  In order to run Conductor yourself, you should have the following service modules running against your Trellis installation:
+### Conductor 
+Conductor lets you monitor and drop in PDF documents for scraping, analysis, and sharing via automatic smart rules.  
+
+* Code: https://github.com/trellisfw/conductor
+* Live: https://trellisfw.github.com/conductor
+
+In order to run Conductor yourself, you should have the following service modules running against your Trellis installation:
 * [ainz](https://github.com/trellisfw/ainz): main "smart rules" orchestration service
 * [abalonemail](https://github.com/trellisfw/abalonemail): service for sending emails in response to rules via sendgrid
 * [sendgrid-ingest](https://github.com/trellisfw/sendgrid-ingest): receives emails from sendgrid and places them in the document queue.
